@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -9,35 +9,36 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/getReadyText"
+            android:id="@+id/youScoredText"
             style="@style/normalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/get_ready"
-            app:layout_constraintBottom_toTopOf="@+id/guessWordText"
+            android:text="@string/you_scored"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/scoreText"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/guessWordText"
+            android:id="@+id/scoreText"
             style="@style/mainText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/guess_the_word"
-            app:layout_constraintBottom_toTopOf="@id/playButton"
+            android:layout_marginBottom="549dp"
+            app:layout_constraintBottom_toTopOf="@+id/playAgainButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/getReadyText"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toBottomOf="@+id/youScoredText"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="40" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/playButton"
+            android:id="@+id/playAgainButton"
             style="@style/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/play"
+            android:text="@string/play_again"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

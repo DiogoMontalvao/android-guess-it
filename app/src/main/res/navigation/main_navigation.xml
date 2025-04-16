@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.example.android_guess_it.title.TitleFragment"
+        android:label="TitleFragment"
+        tools:layout="@layout/title_fragment" >
+
+        <action
+            android:id="@+id/action_titleFragment_to_gameFragment"
+            app:destination="@id/gameFragment"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.android_guess_it.game.GameFragment"
+        android:label="GameFragment"
+        tools:layout="@layout/game_fragment" >
+
+        <action
+            android:id="@+id/action_gameFragment_to_scoreFragment2"
+            app:destination="@id/scoreFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/titleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoreFragment"
+        android:name="com.example.android_guess_it.score.ScoreFragment"
+        android:label="ScoreFragment"
+        tools:layout="@layout/score_fragment" >
+
+        <action
+            android:id="@+id/action_scoreFragment_to_gameFragment2"
+            app:destination="@id/gameFragment"
+            app:popUpTo="@id/titleFragment"/>
+
+        <argument
+            android:name="score"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+</navigation>
