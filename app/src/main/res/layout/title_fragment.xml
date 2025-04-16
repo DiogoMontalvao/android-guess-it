@@ -9,14 +9,11 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textview.MaterialTextView
+            style="@style/normalText"
             android:id="@+id/getReadyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/general_margin"
-            android:fontFamily="@font/montserrat_medium"
             android:text="@string/get_ready"
-            android:textColor="@color/black"
-            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/guessWordText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,14 +21,11 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <com.google.android.material.textview.MaterialTextView
+            style="@style/mainText"
             android:id="@+id/guessWordText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/general_margin"
-            android:fontFamily="@font/montserrat_bold"
             android:text="@string/guess_the_word"
-            android:textColor="@color/black"
-            android:textSize="26sp"
             app:layout_constraintBottom_toTopOf="@id/playButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,13 +33,12 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <com.google.android.material.button.MaterialButton
+            style="@style/button"
             android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:backgroundTint="#23323f"
-            android:fontFamily="@font/montserrat_extrabold"
             android:text="@string/play"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
