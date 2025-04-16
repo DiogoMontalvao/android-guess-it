@@ -9,6 +9,10 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+
+        plugins {
+            id("androidx.navigation.safeargs") version "2.8.6"
+        }
     }
 }
 dependencyResolutionManagement {

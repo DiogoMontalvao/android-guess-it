@@ -6,9 +6,10 @@
     <string name="play">PLAY</string>
 
     <string name="the_word_is">The word is...</string>
+    <string name="score">Score: %1$d</string>
     <string name="got_it">GOT IT</string>
     <string name="skip">SKIP</string>
 
     <string name="you_scored">You Scored</string>
-    <string name="play_again">Play again</string>
+    <string name="play_again">PLAY AGAIN</string>
 </resources>

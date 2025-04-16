@@ -7,24 +7,24 @@
 
     <fragment
         android:id="@+id/titleFragment"
-        android:name="com.example.android_guess_it.title.TitleFragment"
+        android:name="com.example.android_guess_it.screens.title.TitleFragment"
         android:label="TitleFragment"
         tools:layout="@layout/title_fragment" >
 
         <action
-            android:id="@+id/action_titleFragment_to_gameFragment"
+            android:id="@+id/actionTitletoGame"
             app:destination="@id/gameFragment"
             app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.android_guess_it.game.GameFragment"
+        android:name="com.example.android_guess_it.screens.game.GameFragment"
         android:label="GameFragment"
         tools:layout="@layout/game_fragment" >
 
         <action
-            android:id="@+id/action_gameFragment_to_scoreFragment2"
+            android:id="@+id/actionGametoScore"
             app:destination="@id/scoreFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/titleFragment" />
@@ -32,18 +32,17 @@
 
     <fragment
         android:id="@+id/scoreFragment"
-        android:name="com.example.android_guess_it.score.ScoreFragment"
+        android:name="com.example.android_guess_it.screens.score.ScoreFragment"
         android:label="ScoreFragment"
         tools:layout="@layout/score_fragment" >
 
         <action
-            android:id="@+id/action_scoreFragment_to_gameFragment2"
+            android:id="@+id/actionScoretoGame"
             app:destination="@id/gameFragment"
             app:popUpTo="@id/titleFragment"/>
 
         <argument
             android:name="score"
-            android:defaultValue="0"
             app:argType="integer" />
     </fragment>
 </navigation>
