@@ -1,5 +1,6 @@
 package com.example.android_guess_it.screens.game
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
@@ -27,10 +28,13 @@ class GameViewModel : ViewModel() {
         "bubble"
     )
 
-    var word = ""
-    var score = 0
+    val word = MutableLiveData<String>()
+    val score = MutableLiveData<Int>()
 
     init {
+        word.value = ""
+        score.value = 0
+
         resetList()
         nextWord()
     }
@@ -41,17 +45,18 @@ class GameViewModel : ViewModel() {
 
     private fun nextWord() {
         if (wordList.isEmpty()) return
+        // TODO onGameFinished()
 
-        word = wordList.removeAt(0)
-    }
-
-    fun onGotIt() {
-        score++
-        nextWord()
+        word.value = wordList.removeAt(0)
     }
 
     fun onSkip() {
-        score--
+        score.value = score.value?.minus(1)
+        nextWord()
+    }
+
+    fun onGotIt() {
+        score.value = score.value?.plus(1)
         nextWord()
     }
 }
