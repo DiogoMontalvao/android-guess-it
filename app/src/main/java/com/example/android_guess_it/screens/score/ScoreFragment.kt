@@ -26,7 +26,9 @@ class ScoreFragment : Fragment() {
         binding.scoreText.text = args.score.toString()
 
         binding.playAgainButton.setOnClickListener {
-            findNavController().navigate(ScoreFragmentDirections.actionScoretoGame())
+            findNavController().navigate(
+                ScoreFragmentDirections.actionScoretoGame()
+            )
         }
 
         return binding.root
