@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.android_guess_it.R
 import com.example.android_guess_it.databinding.GameFragmentBinding
 import com.examplue.android_guess_it.screens.game.GameViewModel
-import timber.log.Timber
 
 class GameFragment : Fragment() {
     private lateinit var binding: GameFragmentBinding
@@ -42,14 +41,21 @@ class GameFragment : Fragment() {
             binding.scoreText.text = getString(R.string.score, newScore)
         })
 
+        viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { gameHasFinished ->
+            if (gameHasFinished) {
+                finishGame()
+                viewModel.onGameFinishedComplete()
+            }
+        })
+
         return binding.root
     }
 
-    fun gameFinished() {
-        val gameToScore = GameFragmentDirections.actionGametoScore(
-            viewModel.score.value ?: 0
-        )
+    fun finishGame() {
+        val currentScore = viewModel.score.value ?: 0
 
-        findNavController().navigate(gameToScore)
+        findNavController().navigate(
+            GameFragmentDirections.actionGametoScore(currentScore)
+        )
     }
 }
