@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android_guess_it.R
 import com.example.android_guess_it.databinding.GameFragmentBinding
-import com.examplue.android_guess_it.screens.game.GameViewModel
 
 class GameFragment : Fragment() {
     private lateinit var binding: GameFragmentBinding
@@ -44,8 +43,12 @@ class GameFragment : Fragment() {
         viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { gameHasFinished ->
             if (gameHasFinished) {
                 finishGame()
-                viewModel.onGameFinishedComplete()
+                viewModel.eventGameFinishedComplete()
             }
+        })
+
+        viewModel.currentTime.observe(viewLifecycleOwner, Observer { timer ->
+            binding.timerText.text = viewModel.currentTime.value
         })
 
         return binding.root
