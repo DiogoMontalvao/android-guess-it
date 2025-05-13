@@ -1,4 +1,4 @@
-# Android - Guess It App
+# Android - Guess It
 Desenvolvido a partir do curso: [Developing Android Apps with Kotlin](https://www.udacity.com/course/developing-android-apps-with-kotlin--ud9012), disponibilizado pelo Google.<br><br>
 
 Em andamento.
