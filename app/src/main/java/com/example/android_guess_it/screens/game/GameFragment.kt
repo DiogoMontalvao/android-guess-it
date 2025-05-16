@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android_guess_it.R
 import com.example.android_guess_it.databinding.GameFragmentBinding
+import timber.log.Timber
 
 class GameFragment : Fragment() {
     private lateinit var binding: GameFragmentBinding
