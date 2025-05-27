@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android_guess_it.R
 import com.example.android_guess_it.databinding.ScoreFragmentBinding
-import timber.log.*
 
 class ScoreFragment : Fragment() {
     private lateinit var binding: ScoreFragmentBinding
@@ -24,11 +23,11 @@ class ScoreFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val args = navArgs<ScoreFragmentArgs>()
+        val finalScore = navArgs<ScoreFragmentArgs>().value.score
 
         binding = DataBindingUtil.inflate(inflater, R.layout.score_fragment, container, false)
 
-        viewModelFactory = ScoreViewModelFactory(args.value.score)
+        viewModelFactory = ScoreViewModelFactory(finalScore)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
 
         viewModel.score.observe(viewLifecycleOwner, Observer { gameScore ->
