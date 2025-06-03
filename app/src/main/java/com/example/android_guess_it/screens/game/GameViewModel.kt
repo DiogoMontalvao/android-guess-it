@@ -10,7 +10,7 @@ class GameViewModel : ViewModel() {
     companion object {
         private const val DONE = 0L
         private const val ONE_SECOND = 1000L
-        private const val COUNTDOWN_TIME = 10000L
+        private const val COUNTDOWN_TIME = 30000L
     }
 
     private lateinit var wordList: MutableList<String>
@@ -20,6 +20,10 @@ class GameViewModel : ViewModel() {
     val word: LiveData<String>
         get() = _word
 
+    private val _currentTime = MutableLiveData<String>()
+    val currentTime: LiveData<String>
+        get() = _currentTime
+
     private val _score = MutableLiveData<Int>()
     val score: LiveData<Int>
         get() = _score
@@ -28,15 +32,11 @@ class GameViewModel : ViewModel() {
     val eventGameFinished: LiveData<Boolean>
         get() = _eventGameFinished
 
-    private val _currentTime = MutableLiveData<String>()
-    val currentTime: LiveData<String>
-        get() = _currentTime
-
     init {
         _word.value = ""
+        _currentTime.value = ""
         _score.value = 0
         _eventGameFinished.value = false
-        _currentTime.value = ""
 
         resetList()
         nextWord()

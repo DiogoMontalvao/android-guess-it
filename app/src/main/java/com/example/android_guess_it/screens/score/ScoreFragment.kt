@@ -26,13 +26,11 @@ class ScoreFragment : Fragment() {
         val finalScore = navArgs<ScoreFragmentArgs>().value.score
 
         binding = DataBindingUtil.inflate(inflater, R.layout.score_fragment, container, false)
-
         viewModelFactory = ScoreViewModelFactory(finalScore)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
 
-        viewModel.score.observe(viewLifecycleOwner, Observer { gameScore ->
-            binding.scoreText.text = gameScore.toString()
-        })
+        binding.setLifecycleOwner(viewLifecycleOwner)
+        binding.scoreViewModel = viewModel
 
         binding.playAgainButton.setOnClickListener {
             findNavController().navigate(

@@ -24,31 +24,14 @@ class GameFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
-
-        binding.gotItButton.setOnClickListener {
-            viewModel.onGotIt()
-        }
-
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
-            binding.wordText.text = newWord
-        })
-
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            binding.scoreText.text = getString(R.string.score, newScore)
-        })
+        binding.setLifecycleOwner(viewLifecycleOwner)
+        binding.gameViewModel = viewModel
 
         viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { gameHasFinished ->
             if (gameHasFinished) {
                 finishGame()
                 viewModel.eventGameFinishedComplete()
             }
-        })
-
-        viewModel.currentTime.observe(viewLifecycleOwner, Observer { timer ->
-            binding.timerText.text = viewModel.currentTime.value
         })
 
         return binding.root
