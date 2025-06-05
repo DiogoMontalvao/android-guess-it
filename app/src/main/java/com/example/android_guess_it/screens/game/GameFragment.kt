@@ -1,6 +1,11 @@
 package com.example.android_guess_it.screens.game
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android_guess_it.R
 import com.example.android_guess_it.databinding.GameFragmentBinding
+import timber.log.Timber
 
 class GameFragment : Fragment() {
     private lateinit var binding: GameFragmentBinding
@@ -26,6 +32,13 @@ class GameFragment : Fragment() {
 
         binding.setLifecycleOwner(viewLifecycleOwner)
         binding.gameViewModel = viewModel
+
+        viewModel.eventVibration.observe(viewLifecycleOwner, Observer { vibrationType ->
+            if (vibrationType != VibrationType.NO_VIBRATION) {
+                vibrate(vibrationType)
+                viewModel.eventVibrationComplete()
+            }
+        })
 
         viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { gameHasFinished ->
             if (gameHasFinished) {
@@ -43,5 +56,18 @@ class GameFragment : Fragment() {
         findNavController().navigate(
             GameFragmentDirections.actionGametoScore(currentScore)
         )
+    }
+
+    private fun vibrate(pattern: VibrationType) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val vibratorManager =
+                context?.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+            val vibrator = vibratorManager.defaultVibrator
+
+            vibrator.vibrate(VibrationEffect.createWaveform(pattern.pattern, -1))
+        } else {
+            val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibrator.vibrate(VibrationEffect.createWaveform(pattern.pattern, -1))
+        }
     }
 }

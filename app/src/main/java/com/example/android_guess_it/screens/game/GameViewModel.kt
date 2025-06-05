@@ -6,11 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import timber.log.Timber
 
 class GameViewModel : ViewModel() {
     companion object {
+        private const val PANIC_VIBRATION = 10000L
         private const val ONE_SECOND = 1000L
-        private const val COUNTDOWN_TIME = 30000L
+        private const val COUNTDOWN_TIME = 15000L
     }
 
     private lateinit var wordList: MutableList<String>
@@ -32,6 +34,10 @@ class GameViewModel : ViewModel() {
     val score: LiveData<Int>
         get() = _score
 
+    private val _eventVibration = MutableLiveData<VibrationType>()
+    val eventVibration: LiveData<VibrationType>
+        get() = _eventVibration
+
     private val _eventGameFinished = MutableLiveData<Boolean>()
     val eventGameFinished: LiveData<Boolean>
         get() = _eventGameFinished
@@ -40,6 +46,7 @@ class GameViewModel : ViewModel() {
         _word.value = ""
         _currentTimeLong.value = 0
         _score.value = 0
+        _eventVibration.value = VibrationType.NO_VIBRATION
         _eventGameFinished.value = false
 
         resetList()
@@ -48,9 +55,14 @@ class GameViewModel : ViewModel() {
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
             override fun onTick(millisUntilFinished: Long) {
                 _currentTimeLong.value = millisUntilFinished / ONE_SECOND
+
+                if (millisUntilFinished <= PANIC_VIBRATION) {
+                    _eventVibration.value = VibrationType.COUNTDOWN_PANIC
+                }
             }
 
             override fun onFinish() {
+                _eventVibration.value = VibrationType.GAME_OVER
                 _eventGameFinished.value = true
             }
         }.start()
@@ -97,12 +109,18 @@ class GameViewModel : ViewModel() {
     }
 
     fun onGotIt() {
+        _eventVibration.value = VibrationType.CORRECT
+
         _score.value = _score.value?.plus(1)
         nextWord()
     }
 
     fun eventGameFinishedComplete() {
         _eventGameFinished.value = false
+    }
+
+    fun eventVibrationComplete() {
+        _eventVibration.value = VibrationType.NO_VIBRATION
     }
 
     override fun onCleared() {
