@@ -12,7 +12,7 @@ class GameViewModel : ViewModel() {
     companion object {
         private const val PANIC_VIBRATION = 10000L
         private const val ONE_SECOND = 1000L
-        private const val COUNTDOWN_TIME = 15000L
+        private const val COUNTDOWN_TIME = 10000L
     }
 
     private lateinit var wordList: MutableList<String>
